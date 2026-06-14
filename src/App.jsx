@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Auth
 import LoginPage from './pages/auth/Login.page';
@@ -15,13 +15,14 @@ import SettingsPage from './pages/private/Settings.page';
 // Shared
 import LandingPage from './pages/shared/Landing.page';
 import NotFoundPage from './pages/shared/NotFound.page';
+import { useAuth } from './context/Auth.context';
 
 
 
 
 function App() {
-  const { user } = useState(null)
-
+  const { user } = useAuth()
+  
   const AuthRoute = () => {
     return !user ? <Outlet /> : <Navigate to="/dashboard" />
   }
