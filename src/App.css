@@ -9,6 +9,7 @@
 
 
 /* Pages */
+@import url(./styles/NoFound.style.css);
 @import url(./styles/Loading.style.css);
 @import url(./styles/NoInternet.style.css);
 @import url(./styles/Landing.style.css);
