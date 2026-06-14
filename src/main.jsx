@@ -12,16 +12,19 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 import { ThemeProvider } from './context/Theme.context.jsx';
 import { NotifierProvider } from './context/Notifier.context.jsx';
+import { DataProvider } from './context/Data.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <NotifierProvider>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </NotifierProvider>
+        <AuthProvider>
+          <DataProvider>
+            <NotifierProvider>
+              <App />
+            </NotifierProvider>
+          </DataProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>

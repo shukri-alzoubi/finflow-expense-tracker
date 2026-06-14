@@ -2,19 +2,16 @@
     color: var(--bs-body-color);
 }
 
-
 .nav-link:hover {
     background-color: var(--bs-secondary-bg);
     color: var(--bs-body-color);
 }
 
-/* Target the 'lg' breakpoint (992px is standard) */
 @media (min-width: 992px) {
     .mobile-offcanvas {
         display: none !important;
     }
 
-    /* Hide the backdrop if it stays stuck */
     .offcanvas-backdrop {
         display: none !important;
     }
