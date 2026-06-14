@@ -1,3 +1,30 @@
+/* Background */
+/* ================================================ */
+
+.backdrop-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-bs-theme="dark"] .backdrop-blur {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.bg-dark {
+    background-color: #111827 !important;
+}
+
+/* Background Utilities */
+.bg-secondary {
+    background-color: var(--bs-secondary);
+}
+
+
 /* Card Overrides */
 /* ================================================ */
 .card {
@@ -296,4 +323,22 @@ select.form-select option {
     border-radius: 10px;
     height: 6px;
     background-color: var(--bs-border-color) !important;
+}
+
+/* Borders & Dividers */
+/* ================================================ */
+.border,
+.border-top,
+.border-bottom,
+.border-start,
+.border-end {
+    border-color: var(--bs-secondary-bg);
+}
+
+
+/* Hr */
+/* ================================================ */
+hr {
+    background-color: var(--bs-border-color) !important;
+    opacity: 1 !important;
 }

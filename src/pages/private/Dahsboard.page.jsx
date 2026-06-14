@@ -1,14 +1,13 @@
+import MainLayout from "../../components/layout/MainLayout";
 import { useAuth } from "../../context/Auth.context";
 
 const DashboardPage = () => {
     const {logout} = useAuth()
 
 
-    return ( <>
-    Dashboard Page
-    
-    <button className="btn btn-danger" onClick={logout}>Sign out</button>
-    </> );
+    return ( <MainLayout path="/dashboard">
+
+    </MainLayout> );
 }
  
 export default DashboardPage;

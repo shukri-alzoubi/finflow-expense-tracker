@@ -11,14 +11,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 import { ThemeProvider } from './context/Theme.context.jsx';
+import { NotifierProvider } from './context/Notifier.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <NotifierProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </NotifierProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>
