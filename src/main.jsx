@@ -6,16 +6,10 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/Auth.context.jsx';
 
-// Bootstrap
+// Style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
-// Custom Style
-import './styles/Layout.style.css';
-import './styles/Fonts.style.css';
-import './styles/Dark.style.css';
-import './styles/App.style.css';
-
+import './App.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

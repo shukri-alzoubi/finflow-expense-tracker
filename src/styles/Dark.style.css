@@ -1,0 +1,223 @@
+/* ===========================================
+   Bootstrap Dark Theme (Tailwind Gray Palette)
+   Load AFTER bootstrap.min.css
+   Tailwind Colors: gray-50, gray-400, gray-700, gray-800, gray-900
+   =========================================== */
+
+[data-bs-theme="dark"] {
+
+
+  /* borders */
+  --bs-border-color: #374151;
+
+  --bs-tertiary-color: #9ca3af;
+  /* gray-400 */
+
+  /* Body */
+  --bs-body-bg: #111827;
+  /* gray-900 */
+  --bs-body-color: #f9fafb;
+
+  /* Body Colors */
+  --bs-tertiary-bg: #374151;
+
+  /* Borders */
+  --bs-border-color: #374151;
+  /* gray-700 */
+
+  /* Cards */
+  --bs-card-bg: #1f2937;
+  /* gray-800 */
+  --bs-card-border-color: #374151;
+
+  /* Buttons */
+  --bs-primary-bg: #1d4ed8;
+  /* blue-700 */
+  --bs-primary-color: #f9fafb;
+  --bs-primary-hover-bg: #2563eb;
+  --bs-primary-hover-border-color: #2563eb;
+
+  --bs-secondary-bg: #1f2937;
+  /* gray-700 */
+  --bs-secondary-color: #f9fafb;
+  --bs-secondary-hover-bg: #4b5563;
+  --bs-secondary-hover-border-color: #4b5563;
+
+  --bs-success-bg: #15803d;
+  /* green-700 */
+  --bs-success-color: #f9fafb;
+  --bs-success-hover-bg: #16a34a;
+  --bs-success-hover-border-color: #16a34a;
+
+  --bs-info-bg: #0d9488;
+  /* teal-600 */
+  --bs-info-color: #f9fafb;
+  --bs-info-hover-bg: #14b8a6;
+  --bs-info-hover-border-color: #14b8a6;
+
+  --bs-warning-bg: #b45309;
+  /* amber-700 */
+  --bs-warning-color: #111827;
+  --bs-warning-hover-bg: #d97706;
+  --bs-warning-hover-border-color: #d97706;
+
+  --bs-danger-bg: #b91c1c;
+  /* red-700 */
+  --bs-danger-color: #f9fafb;
+  --bs-danger-hover-bg: #dc2626;
+  --bs-danger-hover-border-color: #dc2626;
+
+  /* Links */
+  --bs-link-color: #3b82f6;
+  --bs-link-hover-color: #60a5fa;
+
+  /* Alerts */
+  --bs-alert-bg: #1f2937;
+  --bs-alert-border-color: #374151;
+  --bs-alert-color: #f9fafb;
+
+  /* Forms */
+  --bs-input-bg: #24354d;
+  --bs-input-border-color: #374151;
+  --bs-input-color: #f9fafb;
+  --bs-input-placeholder-color: #97999c;
+
+  --bs-form-check-input-bg: #1f2937;
+  --bs-form-check-input-border-color: #374151;
+
+  /* List Groups */
+  --bs-list-group-hover-bg: #374151;
+  --bs-list-group-hover-color: #f9fafb;
+  --bs-list-group-disabled-color: #9ca3af;
+  --bs-list-group-bg: #1f2937;
+  --bs-list-group-border-color: #374151;
+  --bs-list-group-active-bg: #111827;
+  --bs-list-group-active-color: #f9fafb;
+
+  /* Navbars */
+  --bs-navbar-bg: #1f2937;
+  --bs-navbar-color: #f9fafb;
+  --bs-navbar-hover-color: #60a5fa;
+
+  /* Dropdowns */
+  --bs-dropdown-bg: #1f2937;
+  --bs-dropdown-border-color: #374151;
+  --bs-dropdown-link-hover-bg: #374151;
+  --bs-dropdown-link-hover-color: #f9fafb;
+
+  /* Modals */
+  --bs-modal-bg: #111827;
+  --bs-modal-color: #f9fafb;
+
+  /* Tables */
+  --bs-table-bg: #1f2937;
+  --bs-table-striped-bg: #374151;
+  --bs-table-striped-color: #f9fafb;
+  --bs-table-border-color: #374151;
+
+  /* Toasts */
+  --bs-toast-bg: #1f2937;
+  --bs-toast-color: #f9fafb;
+}
+
+/* Optional: apply bg-body to entire body */
+[data-bs-theme="dark"] {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+/* Hover / focus / active for .list-group-item-action */
+[data-bs-theme="dark"] .list-group-item-action {
+  color: #f9fafb;
+  /* gray-50 text */
+  background-color: var(--bs-list-group-bg);
+}
+
+[data-bs-theme="dark"] .list-group-item-action:hover,
+[data-bs-theme="dark"] .list-group-item-action:focus {
+  background-color: #374151;
+  /* gray-700 hover */
+  color: #f9fafb;
+}
+
+[data-bs-theme="dark"] .list-group-item-action.active {
+  background-color: #111827;
+  /* gray-900 active */
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+.text-body-tertiary {
+  color: var(--bs-tertiary-color) !important;
+}
+
+
+/* ============================= */
+/* React DatePicker – Dark Mode  */
+/* ============================= */
+
+[data-bs-theme="dark"] .react-datepicker {
+  background-color: #1f2937;
+  /* gray-800 */
+  border: 1px solid #374151;
+  /* gray-700 */
+  color: #f9fafb;
+  /* gray-50 */
+}
+
+[data-bs-theme="dark"] .react-datepicker__header {
+  background-color: #111827;
+  /* gray-900 */
+  border-bottom: 1px solid #374151;
+}
+
+[data-bs-theme="dark"] .react-datepicker__current-month,
+[data-bs-theme="dark"] .react-datepicker__day-name {
+  color: #f9fafb;
+}
+
+/* Day cells */
+[data-bs-theme="dark"] .react-datepicker__day {
+  color: #e5e7eb;
+  /* gray-200 */
+}
+
+[data-bs-theme="dark"] .react-datepicker__day:hover {
+  background-color: #374151;
+  /* gray-700 */
+}
+
+[data-bs-theme="dark"] .react-datepicker__day--selected,
+[data-bs-theme="dark"] .react-datepicker__day--keyboard-selected {
+  background-color: #2563eb;
+  /* blue-600 */
+  color: #ffffff;
+}
+
+[data-bs-theme="dark"] .react-datepicker__day--today {
+  border: 1px solid #60a5fa;
+  /* blue-400 */
+}
+
+/* Disabled days */
+[data-bs-theme="dark"] .react-datepicker__day--disabled {
+  color: #6b7280;
+  /* gray-500 */
+}
+
+/* Navigation arrows */
+[data-bs-theme="dark"] .react-datepicker__navigation-icon::before {
+  border-color: #f9fafb;
+}
+
+.bg-body {
+  background: var(--bs-body-bg) !important;
+}
+
+.bg-body-secondary {
+  background-color: var(--bs-secondary-bg) !important;
+}
+
+.bg-body-tertiary {
+  background-color: var(--bs-tertiary-bg) !important;
+}

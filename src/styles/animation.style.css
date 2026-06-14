@@ -1,0 +1,5 @@
+/* Glow Animation */
+.glow {
+    animation: breathe 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(13, 110, 253, 0.4));
+}

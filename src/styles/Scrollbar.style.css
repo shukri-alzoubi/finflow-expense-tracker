@@ -1,0 +1,20 @@
+/* Scrollbar */
+/* ================================================ */
+
+/* Custom Scrollbar for that pro look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bs-body-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bs-secondary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-secondary);
+}

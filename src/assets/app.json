@@ -1,5 +1,6 @@
 {
-    "name" : "FinFlow Expense Tracker",
+    "name" : "FinFlow",
+    "full_name" : "FinFlow Expense Tracker",
     "color" : "primary",
     "icon" : "bi bi-pie-chart-fill"
 }

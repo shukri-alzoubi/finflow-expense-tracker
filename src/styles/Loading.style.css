@@ -72,3 +72,26 @@
     letter-spacing: 2px;
     font-weight: 600;
 }
+
+
+/* Loading Dialog */
+/* ================================================== */
+.loading-dialog {
+    position: absolute;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-dialog .spinner-border {
+    height: 100px;
+    width: 100px;
+    border-width: 1px;
+}
+
+.loading-dialog .spinner-border {
+    height: 150px;
+    width: 150px;
+}

@@ -1,0 +1,299 @@
+/* Card Overrides */
+/* ================================================ */
+.card {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color) !important;
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.card-header,
+.card-footer {
+    border-color: var(--bs-border-color);
+    background-color: transparent;
+}
+
+/* List-group */
+/* ================================================ */
+.list-group {
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.list-group .list-group-item {
+    background-color: var(--bs-tertiary-bg);
+}
+
+/* Table */
+/* ================================================ */
+
+/* Table Overrides */
+.table {
+    --bs-table-bg: transparent !important;
+    --bs-table-border-color: var(--bs-border-color) !important;
+    color: var(--bs-body-color) !important;
+}
+
+.table-dark {
+    background-color: transparent !important;
+}
+
+/* Fix Table Hover to match Tailwind Slate-800 highlight */
+.table-hover>tbody>tr:hover>* {
+    --bs-table-accent-bg: transparent;
+    /* Clear Bootstrap default */
+    background-color: rgba(51, 65, 85, 0.4);
+    /* Tailwind Slate-700 with opacity */
+    color: #ffffff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Ensure the table border color stays subtle on hover */
+.table-hover>tbody>tr:hover {
+    border-color: var(--bs-border-color);
+}
+
+/* Fix for striped tables if you use them */
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: transparent;
+    background-color: rgba(30, 41, 59, 0.3);
+    /* Very subtle Slate-800 */
+    box-shadow: none;
+}
+
+/*Add a pointer cursor to rows to make them feel like app items */
+.table-hover tbody tr {
+    cursor: pointer;
+}
+
+/* Input */
+/* ================================================ */
+
+/* Focus state: Highlights both the icon and the input together */
+.input-group {
+    border: unset;
+    background-color: var(--bs-tertiary-bg) !important;
+    color: var(--bs-input-color) !important;
+    border-radius: 8px;
+    border: 1px var(--bs-secondary-bg) solid;
+    overflow: hidden;
+    transition: 200ms ease all;
+}
+
+/* Base styles for all input elements */
+.form-control,
+.form-select,
+.input-group-text .form-control:focus,
+.form-select:focus {
+    background-color: var(--bs-tertiary-bg) !important;
+    color: var(--bs-body-color);
+    border: unset;
+    transition: 200ms ease all;
+}
+
+/* Container focus effect for the whole input group */
+.input-group:focus-within {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+    border-radius: 0.5rem !important;
+}
+
+/* Seamless Joining: Remove the border between icon and input */
+.input-group .input-group-text {
+    background-color: transparent !important;
+    border: unset !important;
+    border-radius: unset !important;
+    padding-right: 0.9rem !important;
+    padding-left: 0.9rem !important;
+    padding-bottom: 3px !important;
+}
+
+.input-group>.form-control,
+.input-group>.form-select,
+.input-group>.form-control:focus,
+.input-group>.form-select:focus {
+    box-shadow: unset !important;
+    background-color: transparent !important;
+    border: unset !important;
+    border-radius: unset !important;
+    padding-right: 0.9rem !important;
+    padding-left: 0.9rem !important;
+}
+
+.input-group:has(.form-control:focus) {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    border-radius: 0.5rem !important;
+}
+
+select.form-select option {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+.input-group.shadow-none {
+    box-shadow: unset !important;
+}
+
+
+/* Clean Placeholder */
+.form-control::placeholder {
+    color: var(--bs-input-placeholder-color) !important;
+    /* Slate-600 */
+}
+
+/* Select Arrow Fix */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* Button */
+/* ================================================ */
+
+.btn {
+    transition: 100ms all ease !important;
+}
+
+.btn:active {
+    scale: 0.98 !important;
+}
+
+/* Fix btn-dark to match Tailwind Slate-950 */
+.btn-dark {
+    background-color: var(--bs-body-color) !important;
+    /* Tailwind Slate-950 */
+    border: 1px solid #334155;
+    /* Tailwind Slate-700 */
+    color: var(--bs-body-bg) !important;
+    /* Slate-50 */
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Focus Ring (matches our input-group-focus) */
+.btn-dark:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
+    outline: none !important;
+}
+
+/* Ensure icons inside btn-dark are muted by default and bright on hover */
+.btn-dark i {
+    color: #94a3b8 !important;
+    /* Slate-400 */
+    transition: color 0.2s ease !important;
+}
+
+.btn-dark:hover i {
+    color: #ffffff !important;
+}
+
+.btn:focus {
+    box-shadow: unset !important;
+}
+
+.btn-body,
+.btn-body:active {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+    border: var(--bs-border-color);
+}
+
+.btn-body:hover {
+    background-color: var(--bs-tertiary-bg);
+}
+
+.btn-body.active {
+    background-color: var(--bs-primary) !important;
+    color: var(--bs-light) !important;
+}
+
+.btn-outline-body {
+    background-color: transparent;
+    color: var(--bs-body-color);
+    border-color: var(--bs-body-color);
+}
+
+.btn-outline-body:hover,
+.btn-outline-body:active,
+.btn-outline-body:focus {
+    background-color: var(--bs-body-color) !important;
+    color: var(--bs-body-bg) !important;
+}
+
+
+/* Modals */
+/* ================================================ */
+/* Ensure the modal always sits above the backdrop */
+.modal {
+    z-index: 1055 !important;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+}
+
+.z-top {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9999 !important;
+}
+
+/* Custom class to remove modal styling */
+.modal-transparent .modal-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Optional: If you want to remove the dark backdrop (the dimming effect) */
+.modal-transparent .modal-backdrop {
+    opacity: 0 !important;
+}
+
+/* Dropdown */
+/* ================================================ */
+
+/* Dropdowns & Modals */
+.dropdown-menu,
+.modal-content {
+    overflow: hidden;
+    background-color: var(--bs-body-bg) !important;
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-border-color) !important;
+    padding: 0;
+}
+
+.dropdown-item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bs-tertiary-bg) !important;
+}
+
+/* Text */
+/* ================================================ */
+
+.text-secondary,
+.text-muted {
+    color: var(--bs-secondary) !important;
+}
+
+.text-truncate-2 {
+    height: 45px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Number of lines before (...) */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    /* Prevents long words from breaking the layout */
+}
+
+/* Progress Bars */
+.progress {
+    border-radius: 10px;
+    height: 6px;
+    background-color: var(--bs-border-color) !important;
+}

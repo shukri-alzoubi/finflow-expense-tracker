@@ -1,0 +1,41 @@
+/* Imported Styles */
+/* ======================================= */
+
+/* Main */
+@import url(./styles/Dark.style.css);
+@import url(./styles/Layout.style.css);
+@import url(./styles/Scrollbar.style.css);
+@import url(./styles/Bootstrap.style.css);
+
+
+/* Pages */
+@import url(./styles/Loading.style.css);
+@import url(./styles/NoInternet.style.css);
+@import url(./styles/Landing.style.css);
+
+/* Components */
+@import url(./styles/DatePicker.style.css);
+
+
+/* Custom Styles */
+/* ======================================= */
+@font-face {
+    font-family: 'SegoeUIVF';
+    src: url(./assets/fonts/SegoeUIVF.ttf);
+}
+
+:root {
+    --bs-input-bg: #adb5bd69;
+    --bs-input-placeholder-color: #808080;
+}
+
+body {
+    font-family: 'SegoeUIVF' !important;
+    color: var(--bs-body-color) !important;
+}
+
+.auth-image {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
