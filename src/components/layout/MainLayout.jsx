@@ -5,7 +5,7 @@ import ConfirmModal from '../modals/Confirm.modal';
 import { useTheme } from '../../context/Theme.context';
 import SidebarContent from './Sidebar';
 import { useAuth } from '../../context/Auth.context';
-import BackToTop from '../ui/BackToTopButton.ui';
+import BackToTop from '../ui/BackToTopButton';
 import { useEffect, useRef, useState } from 'react';
 
 const MainLayout = ({ children, path = '/dashboard' }) => {

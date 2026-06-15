@@ -6,6 +6,7 @@
 @import url(./styles/Layout.style.css);
 @import url(./styles/Scrollbar.style.css);
 @import url(./styles/Bootstrap.style.css);
+@import url(./styles/Animation.style.css);
 
 
 /* Pages */
@@ -17,7 +18,7 @@
 /* Components */
 @import url(./styles/DatePicker.style.css);
 @import url(./styles/Sidebar.style.css);
-@import url(./styles/scroll.style.css);
+@import url(./styles/Scroll.style.css);
 
 
 /* Custom Styles */
@@ -84,4 +85,25 @@ body {
 .backdrop-blur {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* Transition Card */
+/* ================================ */
+.transition-card {
+     border: 1px solid var(--bs-body-bg);
+      z-index: 10;
+}
+
+.transition-card:hover{
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+
+.transition-card:focus-within{
+    z-index: 20;
 }

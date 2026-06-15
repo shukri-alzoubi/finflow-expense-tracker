@@ -1,4 +1,4 @@
-* Navigation */
+/* Navigation */
 .navbar {
     padding: 20px 0;
     transition: all 0.3s;
@@ -67,3 +67,4 @@ footer {
     padding: 60px 0;
     background: var(--bs-body-bg);
 }
+
