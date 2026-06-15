@@ -1,0 +1,20 @@
+.v-scroll-wrapper {
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.v-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;       /* Firefox */
+}
+
+.v-scroll-content::-webkit-scrollbar {
+  display: none;               /* Chrome */
+}
+
+.scroll-btn:hover {
+  background: #e2e2e2;
+}

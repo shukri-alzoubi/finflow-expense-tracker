@@ -14,7 +14,7 @@ const SidebarContent = ({ menuItems = [], path = '/', onSignOut, user, isAdmin =
     } = useNotifier();
 
     return (<>
-        <div className="overflow-y-auto d-flex flex-column p-1 p-lg-3 h-100">
+        <div className="overflow-y-auto d-flex flex-column p-1 p-lg-3 h-100 sidebar">
 
             <div className="flex-grow-1 overflow-y-auto">
 
@@ -28,19 +28,15 @@ const SidebarContent = ({ menuItems = [], path = '/', onSignOut, user, isAdmin =
                                 <Link
                                     to={item.path}
                                     className={`nav-link border-0 py-2 px-3 rounded-3 mb-1 transition-all
-                                ${path === item.path
-                                            ? 'active bg-primary shadow-sm'
-                                            : 'hover-bg'
-                                        }`}
+                                ${path === item.path && 'active bg-primary shadow-sm'}`}
                                 >
                                     <i className={`bi ${item.icon} me-3`}></i> {item.name}
                                 </Link>
                             </li>)
-
                     )}
 
                     <li>
-                        <Link className="nav-link border-0 py-2 px-3 rounded-3 mb-1 transition-all hover-bg text-danger" onClick={onSignOut}>
+                        <Link className="nav-link border-0 py-2 px-3 rounded-3 mb-1 transition-all text-danger" onClick={onSignOut}>
                             <i className="bi bi-box-arrow-right me-3"></i> Sign Out
                         </Link>
                     </li>

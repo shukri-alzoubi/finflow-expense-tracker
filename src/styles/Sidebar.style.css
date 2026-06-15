@@ -1,8 +1,12 @@
-.nav-link {
+.sidebar .nav .nav-link {
     color: var(--bs-body-color);
 }
 
-.nav-link:hover {
+.sidebar .nav .nav-link.active{
+    color: white !important;
+}
+
+.sidebar .nav .nav-link:hover {
     background-color: var(--bs-secondary-bg);
     color: var(--bs-body-color);
 }
