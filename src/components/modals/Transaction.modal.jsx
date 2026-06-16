@@ -34,62 +34,62 @@ const TransactionModal = ({ initialValue, onSubmit, onCancel, isNew = false }) =
     }
 
     return (<>
-        <div class="modal-header border-0 pb-0">
-            <h5 class="fw-bold">{isNew ? 'New Transaction' : 'Update Transaction'}</h5>
-            <button type="button" class="btn-close shadow-none" onClick={onCancel}></button>
+        <div className="modal-header border-0 pb-0">
+            <h5 className="fw-bold">{isNew ? 'New Transaction' : 'Update Transaction'}</h5>
+            <button type="button" className="btn-close shadow-none" onClick={onCancel}></button>
         </div>
-        <div class="modal-body p-4">
+        <div className="modal-body p-4">
             <form onSubmit={handleSubmitForm}>
 
                 {/* Type */}
-                <div class="btn-group w-100 mb-4" role="group">
-                    <input type="radio" class="btn-check" name="type" id="exp" onChange={() => { }}
+                <div className="btn-group w-100 mb-4" role="group">
+                    <input type="radio" className="btn-check" name="type" id="exp" onChange={() => { }}
                         checked={transaction.type === 'expense'} onClick={() => setTransaction({ ...transaction, type: 'expense', categoryId: '' })} />
-                    <label class="btn btn-outline-danger fw-bold py-2" htmlFor="exp">Expense</label>
+                    <label className="btn btn-outline-danger fw-bold py-2" htmlFor="exp">Expense</label>
 
                     <input
-                        type="radio" class="btn-check" name="type" id="inc" onChange={() => { }}
+                        type="radio" className="btn-check" name="type" id="inc" onChange={() => { }}
                         checked={transaction.type === 'income'} onClick={() => setTransaction({ ...transaction, type: 'income', categoryId: '' })} />
-                    <label class="btn btn-outline-success fw-bold py-2" htmlFor="inc">Income</label>
+                    <label className="btn btn-outline-success fw-bold py-2" htmlFor="inc">Income</label>
                 </div>
 
                 {/* Amount */}
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
+                <div className="mb-3">
+                    <label className="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
                         Amount
                         {/* Error */}
                         <span className="small text-danger">{formError?.amount}</span>
                     </label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light border-0">$</span>
+                    <div className="input-group">
+                        <span className="input-group-text bg-light border-0">$</span>
                         <input
-                            type="text" class="form-control border-0 bg-light shadow-none py-2" placeholder="0.00"
+                            type="text" className="form-control border-0 bg-light shadow-none py-2" placeholder="0.00"
                             value={transaction.amount} onChange={(e) => setTransaction({ ...transaction, amount: e.target.value })} />
                     </div>
                 </div>
 
                 {/* Description */}
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
+                <div className="mb-3">
+                    <label className="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
                         Description
                         {/* Error */}
                         <span className="small text-danger">{formError?.description}</span>
                     </label>
                     <input
-                        type="text" class="form-control border-0 bg-light shadow-none py-2" placeholder="e.g. Server Hosting"
+                        type="text" className="form-control border-0 bg-light shadow-none py-2" placeholder="e.g. Server Hosting"
                         value={transaction.description} onChange={(e) => setTransaction({ ...transaction, description: e.target.value })} />
                 </div>
 
                 {/* Category */}
-                <div class="row">
-                    <div class="col-6">
-                        <label class="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
+                <div className="row">
+                    <div className="col-6">
+                        <label className="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
                             Category
                             {/* Error */}
                             <span className="small text-danger">{formError?.categoryId}</span>
                         </label>
                         <select
-                            class="form-select border-0 bg-light shadow-none py-2"
+                            className="form-select border-0 bg-light shadow-none py-2"
                             value={transaction.categoryId} onChange={(e) => setTransaction({ ...transaction, categoryId: e.target.value })} >
                             <option value={' '}>Choose Category ...</option>
                             {categories
@@ -101,8 +101,8 @@ const TransactionModal = ({ initialValue, onSubmit, onCancel, isNew = false }) =
                     </div>
 
                     {/* Date */}
-                    <div class="col-6">
-                        <label class="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
+                    <div className="col-6">
+                        <label className="form-label small fw-bold text-muted text-uppercase d-flex justify-content-between">
                             Date
                             {/* Error */}
                             <span className="small text-danger">{formError?.date}</span>
@@ -113,7 +113,7 @@ const TransactionModal = ({ initialValue, onSubmit, onCancel, isNew = false }) =
                         />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold mt-4 rounded-3">
+                <button type="submit" className="btn btn-primary w-100 py-3 fw-bold mt-4 rounded-3">
                     Save Transaction
                 </button>
             </form>

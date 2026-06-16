@@ -8,6 +8,7 @@ import { formatCurrency } from "../../utils/formatCurrency.util";
 import { useMemo } from "react";
 import { Category } from "../../models/Category.model";
 import { LazyItem } from "../../components/utils/LazyItem";
+import { useRestrictions } from "../../hooks/useRestrictions";
 
 const CategoriesPage = () => {
     const {
@@ -25,6 +26,8 @@ const CategoriesPage = () => {
         deleteDocument,
     } = useData();
 
+    const { canAddCategory } = useRestrictions();
+
 
     const budgets = useMemo(() => {
         let budgets = {};
@@ -40,19 +43,21 @@ const CategoriesPage = () => {
     }, [transactions, categories])
 
     const handleAddCategory = async () => {
-        showModal(<CategoryModal
-            onCancel={closeModal}
-            onSubmit={async (newCategory) => {
-                await showLoadingModal(true);
-                try {
-                    await insertDocument('categories', newCategory)
-                } catch (error) {
-                    console.log(error.message);
-                    showToast('Something went wrong', 'danger');
-                }
-                await showLoadingModal(false);
-            }}
-        />);
+        canAddCategory(() => {
+            showModal(<CategoryModal
+                onCancel={closeModal}
+                onSubmit={async (newCategory) => {
+                    await showLoadingModal(true);
+                    try {
+                        await insertDocument('categories', newCategory)
+                    } catch (error) {
+                        console.log(error.message);
+                        showToast('Something went wrong', 'danger');
+                    }
+                    await showLoadingModal(false);
+                }}
+            />);
+        })
     }
 
     const handleUpdateCategory = (category) => {

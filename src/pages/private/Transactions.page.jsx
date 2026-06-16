@@ -11,6 +11,7 @@ import { LazyItem } from "../../components/utils/LazyItem";
 import { isInRange, isSameMonth, isSameYear } from "../../utils/date.util";
 import { Category } from "../../models/Category.model";
 import TransactionCard from "../../components/cards/Transaction.card";
+import { useRestrictions } from "../../hooks/useRestrictions";
 
 const defaultFilterValue = {
     query: '',
@@ -37,6 +38,8 @@ const TransactionsPage = () => {
         insertDocument,
         updateDocument,
     } = useData();
+
+    const { canAddTransaction } = useRestrictions();
 
     const [filter, setFilter] = useState(defaultFilterValue);
 
@@ -75,21 +78,24 @@ const TransactionsPage = () => {
 
     // Add A New Transaction
     const handleAddTransaction = () => {
-        showModal(<TransactionModal
-            isNew
-            onCancel={closeModal}
-            onSubmit={async (newTransaction) => {
-                await showLoadingModal(true);
-                try {
-                    await insertDocument('transactions', newTransaction);
-                    showToast('Transaction was created', 'success');
-                } catch (error) {
-                    console.log(error.message)
-                    showToast('Something went wrong', 'danger');
-                }
-                await showLoadingModal(false);
-            }}
-        />)
+        canAddTransaction(() => {
+            showModal(<TransactionModal
+                isNew
+                onCancel={closeModal}
+                onSubmit={async (newTransaction) => {
+                    await showLoadingModal(true);
+                    try {
+                        await insertDocument('transactions', newTransaction);
+                        showToast('Transaction was created', 'success');
+                    } catch (error) {
+                        console.log(error.message)
+                        showToast('Something went wrong', 'danger');
+                    }
+                    await showLoadingModal(false);
+                }}
+            />)
+        })
+
     }
 
     // Update Selected Transaction
@@ -182,11 +188,11 @@ const TransactionsPage = () => {
                 const category = categories.find((c) => c.id === transaction.categoryId) ?? Category.instance();
 
                 return <LazyItem key={transaction.id}>
-                    <TransactionCard 
+                    <TransactionCard
                         transaction={transaction}
                         category={category}
                         onEdit={() => handleUpdateTransaction(transaction)}
-                        onDelete={()=> handleDeleteTransaction(transaction)}
+                        onDelete={() => handleDeleteTransaction(transaction)}
                     />
                 </LazyItem>
             })}

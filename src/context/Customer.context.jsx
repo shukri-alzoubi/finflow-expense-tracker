@@ -19,7 +19,6 @@ export const CustomerProvider = ({ children }) => {
             setLoading(false);
         }
 
-        refreshCustomer();
         const unsub = onSnapshot(doc(db, `users/${user.uid}`), (snapshot) => {
             if (snapshot.exists()) {
                 setCustomer(snapshot.data());
@@ -88,4 +87,11 @@ export const CustomerProvider = ({ children }) => {
 
 }
 
+/**
+ * @returns {{
+ * customer: Customer | null,
+ * updateCustomer: (customer) => Promise<void>,
+ * refreshCustomer: () => Promise<void>,
+ * }}
+ */
 export const useCustomer = () => useContext(CustomerContext);
