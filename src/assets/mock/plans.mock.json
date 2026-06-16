@@ -1,0 +1,47 @@
+[
+  {
+    "planName": "Starter",
+    "planId": "free",
+    "price": 0,
+    "currency": "USD",
+    "badge": null,
+    "limits": {
+      "transactions": 50,
+      "categories": 10
+    },
+    "permissions": {
+      "import": false,
+      "export": false,
+      "cloud": true
+    },
+    "features": [
+      "Up to 50 transactions",
+      "10 custom categories",
+      "Real-time cloud sync",
+      "Basic dashboard analytics"
+    ]
+  },
+  {
+    "planName": "Professional",
+    "planId": "pro",
+    "price": 8,
+    "currency": "USD",
+    "badge": "popular",
+    "limits": {
+      "transactions": -1,
+      "categories": -1
+    },
+    "permissions": {
+      "import": true,
+      "export": true,
+      "cloud": true
+    },
+    "features": [
+      "Unlimited transactions",
+      "Unlimited custom categories",
+      "Full Data Import & Export (CSV/JSON)",
+      "Advanced financial charts & reports",
+      "Priority customer support"
+    ]
+  }
+]
