@@ -1,0 +1,47 @@
+{
+    "light": {
+        "value": "Light",
+        "id": "light",
+        "hex": "#f8f9fa"
+    },
+    "primary": {
+        "value": "Blue",
+        "id": "primary",
+        "hex": "#0d6efd"
+    },
+    "success": {
+        "value": "Green",
+        "id": "success",
+        "hex": "#198754"
+    },
+    "danger": {
+        "value": "Red",
+        "id": "danger",
+        "hex": "#dc3545"
+    },
+    "secondary": {
+        "value": "Gray",
+        "id": "secondary",
+        "hex": "#6c757d"
+    },
+    "warning": {
+        "value": "Yellow",
+        "id": "warning",
+        "hex": "#ffc107"
+    },
+    "info": {
+        "value": "Light Blue",
+        "id": "info",
+        "hex": "#0dcaf0"
+    },
+    "black": {
+        "value": "Black",
+        "id": "black",
+        "hex": "#000000"
+    },
+    "white": {
+        "value": "White",
+        "id": "white",
+        "hex": "#FFFFFF"
+    }
+}

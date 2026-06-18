@@ -1,0 +1,90 @@
+[
+  {
+    "id": "cat_01",
+    "uid": "user_dev_01",
+    "name": "Software & SaaS",
+    "type": "expense",
+    "budget": 200,
+    "icon": "bi bi-laptop",
+    "color": "primary",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_02",
+    "uid": "user_dev_01",
+    "name": "Marketing & Ads",
+    "type": "expense",
+    "budget": 1200,
+    "icon": "bi bi-megaphone",
+    "color": "success",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_03",
+    "uid": "user_dev_01",
+    "name": "Infrastructure & Hosting",
+    "type": "expense",
+    "budget": 500,
+    "icon": "bi bi-lightning",
+    "color": "info",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_04",
+    "uid": "user_dev_01",
+    "name": "Office & Workspace",
+    "type": "expense",
+    "budget": 300,
+    "icon": "bi bi-house",
+    "color": "secondary",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_05",
+    "uid": "user_dev_01",
+    "name": "Licensing & Tooling",
+    "type": "expense",
+    "budget": 150,
+    "icon": "bi bi-wrench",
+    "color": "warning",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_06",
+    "uid": "user_dev_01",
+    "name": "Legal & Security",
+    "type": "expense",
+    "budget": 400,
+    "icon": "bi bi-shield-check",
+    "color": "danger",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_07",
+    "uid": "user_dev_01",
+    "name": "Product Sales",
+    "type": "income",
+    "budget": 0,
+    "icon": "bi bi-cart",
+    "color": "success",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  },
+  {
+    "id": "cat_08",
+    "uid": "user_dev_01",
+    "name": "Subscription Revenue",
+    "type": "income",
+    "budget": 0,
+    "icon": "bi bi-wallet2",
+    "color": "primary",
+    "createdAt": 1779984000000,
+    "updatedAt": 1779984000000
+  }
+]
