@@ -1,9 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./Auth.context";
 import { db } from "../config/firebase.config";
 import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import Loading from "../components/feedback/Loading";
 import Customer from "../models/Customer.model";
+import plans from '../assets/mock/plans.mock.json'
+import Plan from "../models/Plan.model";
 
 const CustomerContext = createContext();
 
@@ -30,6 +32,9 @@ export const CustomerProvider = ({ children }) => {
 
         return () => unsub();
     }, [user]);
+
+    // Get Current Plan
+    const currentPlan = useMemo(() => plans[customer?.plan?.id] ?? plans.free, [customer]);
 
     // First Time Users
     const createCustomer = async () => {
@@ -80,7 +85,7 @@ export const CustomerProvider = ({ children }) => {
         }
     }
 
-    return <CustomerContext.Provider value={{ customer, updateCustomer, refreshCustomer }}>
+    return <CustomerContext.Provider value={{ customer, updateCustomer, refreshCustomer, currentPlan }}>
         {isLoading && <Loading message="Fetching Customer ..." />}
         {!isLoading && children}
     </CustomerContext.Provider>
@@ -90,8 +95,9 @@ export const CustomerProvider = ({ children }) => {
 /**
  * @returns {{
  * customer: Customer | null,
- * updateCustomer: (customer) => Promise<void>,
+ * updateCustomer: (customer: Customer) => Promise<void>,
  * refreshCustomer: () => Promise<void>,
+ * currentPlan: Plan,
  * }}
  */
 export const useCustomer = () => useContext(CustomerContext);
