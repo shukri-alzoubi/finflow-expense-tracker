@@ -256,7 +256,7 @@ const SettingsPage = () => {
 
                                         {/* Plan Amount */}
                                         <span className="badge bg-secondary-subtle text-secondary fs-6 px-3 rounded-pill">
-                                            {formatCurrency(currentPlan.price.amount)}/mo
+                                            ${currentPlan.price.amount}/mo
                                         </span>
 
                                         {/* Current Plan */}

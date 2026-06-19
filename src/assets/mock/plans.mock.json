@@ -1,6 +1,7 @@
 {
     "free": {
-        "planName": "Starter",
+        "name": "Starter",
+        "description" : "Perfect for getting started",
         "planId": "free",
         "price": {
             "amount": 0,
@@ -19,18 +20,18 @@
         "features": [
             "Up to 50 transactions",
             "10 custom categories",
-            "Real-time cloud sync",
-            "Basic dashboard analytics"
+            "Real-time cloud sync"
         ]
     },
     "pro": {
-        "planName": "Professional",
+        "name": "Professional",
+        "description" : "For serious financial tracking",
         "planId": "pro",
         "price": {
             "amount": 8,
             "currency": "USD"
         },
-        "badge": "popular",
+        "badge": "most popular",
         "limits": {
             "transactions": -1,
             "categories": -1
@@ -44,7 +45,6 @@
             "Unlimited transactions",
             "Unlimited custom categories",
             "Full Data Import & Export (CSV/JSON)",
-            "Advanced financial charts & reports",
             "Priority customer support"
         ]
     }

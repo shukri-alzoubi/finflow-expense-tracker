@@ -78,7 +78,7 @@ const SignupPage = () => {
             <button
                 type="button" onClick={handleGoogleSignUp}
                 className="btn btn-dark w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2">
-                <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="20" class="me-2" alt="Google" />
+                <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="20" className="me-2" alt="Google" />
                 Sign Up with Google
             </button>
 

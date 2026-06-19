@@ -19,6 +19,7 @@ export const CustomerProvider = ({ children }) => {
         if (!user) {
             setCustomer(null);
             setLoading(false);
+            return () => { }
         }
 
         const unsub = onSnapshot(doc(db, `users/${user.uid}`), (snapshot) => {
@@ -38,38 +39,46 @@ export const CustomerProvider = ({ children }) => {
 
     // First Time Users
     const createCustomer = async () => {
-        try {
-            const customerRef = doc(db, `users/${user.uid}`);
-            await setDoc(customerRef, Customer.instance({
-                uid: user.uid,
-                email: user.email,
-                emailVerified: user.emailVerified,
-                displayName: user.displayName,
-                createdAt: new Date(user.metadata.creationTime).getTime(),
-                lastActive: new Date(user.metadata.lastSignInTime).getTime(),
-                photoUrl: user.photoURL,
-                plan: { lastDue: Date.now() }
-            }))
-        } catch (error) {
-            console.log(error.message);
+        if (user) {
+            try {
+                const customerRef = doc(db, `users/${user.uid}`);
+                await setDoc(customerRef, Customer.instance({
+                    uid: user.uid,
+                    email: user.email,
+                    emailVerified: user.emailVerified,
+                    displayName: user.displayName,
+                    createdAt: new Date(user.metadata.creationTime).getTime(),
+                    lastActive: new Date(user.metadata.lastSignInTime).getTime(),
+                    photoUrl: user.photoURL,
+                    plan: { lastDue: Date.now() }
+                }))
+            } catch (error) {
+                console.log(error.message);
+            }
+        } else {
+            return;
         }
     }
 
     // Update Customer Instance
     const updateCustomer = async (data) => {
-        try {
-            const customerRef = doc(db, `users/${user.uid}`);
-            await updateDoc(customerRef, { ...data })
-            await refreshCustomer();
-        } catch (error) {
-            console.log(error.message);
+        if (user) {
+            try {
+                const customerRef = doc(db, `users/${user.uid}`);
+                await updateDoc(customerRef, { ...data })
+                await refreshCustomer();
+            } catch (error) {
+                console.log(error.message);
+            }
+        } else {
+            return
         }
     }
 
     // Update Customer Data on Each User State Change
     const refreshCustomer = async () => {
-        try {
-            if (user) {
+        if (user) {
+            try {
                 await updateCustomer({
                     uid: user.uid,
                     email: user.email,
@@ -79,9 +88,11 @@ export const CustomerProvider = ({ children }) => {
                     lastActive: new Date(user.metadata.lastSignInTime).getTime(),
                     photoUrl: user.photoURL,
                 });
+            } catch (error) {
+                console.log(error.message)
             }
-        } catch (error) {
-            console.log(error.message)
+        } else {
+            return;
         }
     }
 

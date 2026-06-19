@@ -2,5 +2,30 @@
     "name" : "FinFlow",
     "full_name" : "FinFlow Expense Tracker",
     "color" : "primary",
-    "icon" : "bi bi-pie-chart-fill"
+    "icon" : "bi bi-pie-chart-fill",
+    "description": "The minimalist expense tracker built for modern founders. Track transactions, set category budgets, and save time with one-click Google login.",
+    "links": [
+        {
+            "id": "github",
+            "name": "Github",
+            "path": "https://github.com",
+            "icon": "bi bi-github"
+        },
+        {
+            "id": "linkedin",
+            "name": "Linked In",
+            "path": "https://linkedin.com",
+            "icon": "bi bi-linkedin"
+        },
+        {
+            "id": "email",
+            "name": "Contact",
+            "path": "mailto:shukri.alzoubi@example.com",
+            "icon": "bi bi-envelope-at"
+        }
+    ],
+    "plans": {
+        "free":{},
+        "pro": {}
+    }
 }

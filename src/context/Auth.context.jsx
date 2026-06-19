@@ -24,7 +24,7 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState();
 
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setLoading] = useState(true);
@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
         return () => unsub();
     }, [])
 
+    // Fetch Admin
     const initialize = async (muser) => {
         setLoading(true);
         try {
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false)
     }
 
+    // Sign In
     const login = async (email, password) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
@@ -64,6 +66,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    // Sign Up
     const createUser = async (email, password) => {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
@@ -79,16 +82,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    // Sign In With Google
-    const googleSignIn = async () => {
-        try {
-            await signInWithPopup(auth, googleProvider);
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
-
+    // Sign Out
     const logout = async () => {
         try {
             if (user) {
@@ -96,6 +90,16 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (error) {
             throw new Error(error.message);
+        }
+    }
+    
+    // Sign In With Google
+    const googleSignIn = async () => {
+        try {
+            await signInWithPopup(auth, googleProvider);
+            return true;
+        } catch (error) {
+            return false;
         }
     }
 
@@ -113,6 +117,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    // Send a password reset link to email address
     const restPasswordLink = async (email) => {
         try {
             await sendPasswordResetEmail(auth, email);
