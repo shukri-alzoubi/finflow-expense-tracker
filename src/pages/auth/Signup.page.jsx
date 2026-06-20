@@ -75,6 +75,7 @@ const SignupPage = () => {
                 Sign up to start creating professional stuff
             </p>
 
+            {/* Google Sign In Button */}
             <button
                 type="button" onClick={handleGoogleSignUp}
                 className="btn btn-dark w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2">
@@ -124,6 +125,7 @@ const SignupPage = () => {
                 {formError?.root && <div className="form-text text-danger fs-sm text-end">{formError.root}</div>}
             </div>
 
+            {/* Terms And Coditions */}
             <div className="form-check mb-3 small">
                 <input className="form-check-input" type="checkbox" value="" id="termsCheck" />
                 <label className="form-check-label">
@@ -131,6 +133,7 @@ const SignupPage = () => {
                 </label>
             </div>
 
+            {/* Sign Up Button */}
             <button
                 type="submit"
                 className="btn btn-dark w-100 mb-3">
@@ -138,6 +141,7 @@ const SignupPage = () => {
             </button>
             <hr />
 
+            {/* Switch To Login Page */}
             <div className="text-center fw-300 mb-4 fa-sm">
                 <span>Already Have An Account?</span>
                 <span

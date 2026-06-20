@@ -148,8 +148,12 @@ export const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={values}>
-            {!isLoading && children}
-            {isLoading && <Loading message="Loading Data ..." />}
+            {user && <>
+                {!isLoading && children}
+                {isLoading && <Loading message="Loading Data ..." />}
+            </>}
+
+            {!user && children}
         </DataContext.Provider>
     );
 };

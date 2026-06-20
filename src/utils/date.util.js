@@ -1,5 +1,7 @@
 import { format, isValid, parseISO } from 'date-fns'
 
+export const dateNow = () => new Date();
+
 export const isSameDate = (d1, d2)=>{
     if(!d1 || !d2) return false;
 

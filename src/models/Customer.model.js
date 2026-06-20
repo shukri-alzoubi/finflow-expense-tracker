@@ -7,6 +7,7 @@ export default class Customer {
     /** @type {string} */ photoUrl;
     /** @type {string} */ createdAt;
     /** @type {string} */ lastActive;
+    /** @type {'active' | 'deleted'} */ status;
     /** 
      * @type {{
      * id: string,
@@ -30,6 +31,7 @@ export default class Customer {
             photoUrl: values.photoUrl,
             createdAt: values.createdAt,
             lastActive: values.lastActive,
+            status: values.status ?? 'active',
             plan: {
                 id: values.plan?.id ?? 'free',
                 lastDue: values.plan?.lastDue,

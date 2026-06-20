@@ -6,22 +6,26 @@ const TransactionCard = ({ transaction, category, onEdit, onDelete }) => {
 
     return (<li className="list-group-item rounded bg-body-secondary d-flex align-items-center gap-2 p-2 mb-2">
 
+        {/* Category */}
         <div className={`icon-box bg-${category.color}-subtle text-${category.color} border`}>
             <i className={`${category.icon}`}></i>
         </div>
 
+        {/* Category, Description and due date */}
         <div className="flex-grow-1 text-truncate">
             <div className="fs-sm text-body-tertiary w-100 text-truncate">{category.name}</div>
             <div className="w-100 text-truncate">{transaction.description}</div>
             <div className="fs-sm text-body-tertiary">{formatDate(transaction.date)}</div>
         </div>
 
+        {/* Transaction Type */}
         <div>
             <span className={`badge bg-${transaction.type === 'expense' ? 'danger' : 'success'}-subtle text-${transaction.type === 'expense' ? 'danger' : 'success'}`}>
                 {transaction.type === 'expense' ? '-' : '+'} {formatCurrency(transaction.amount)}
             </span>
         </div>
 
+        {/* Actions */}
         <div className="dropdown">
 
             <button className="btn border-0" data-bs-toggle="dropdown">

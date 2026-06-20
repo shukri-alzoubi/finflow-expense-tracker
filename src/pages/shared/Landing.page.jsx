@@ -12,6 +12,7 @@ const LandingPage = () => {
     const { user } = useAuth();
     const { theme, toggleTheme } = useTheme();
 
+    // Upgrade Plan
     const handleUpgradePlan = (planId) => {
         if(user){
             if(planId === 'free'){
@@ -31,7 +32,7 @@ const LandingPage = () => {
             <nav className="navbar navbar-expand-lg fixed-top bg-body-secondary border-bottom shadow">
                 <div className="container">
                     <a className="navbar-brand fw-extrabold" href="/#">
-                        <i className={`${app.icon} text-${app.color} me-2`}></i>{app.full_name}
+                        <i className={`${app.icon} text-${app.color} me-2`}></i>{app.name}
                     </a>
                     <button className="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
@@ -174,6 +175,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
+            {/* Footer */}
             <Footer />
         </div>
     );

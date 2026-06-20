@@ -1,11 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./Auth.context";
 import { db } from "../config/firebase.config";
-import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, onSnapshot, setDoc, updateDoc, writeBatch } from "firebase/firestore";
 import Loading from "../components/feedback/Loading";
 import Customer from "../models/Customer.model";
-import plans from '../assets/mock/plans.mock.json'
 import Plan from "../models/Plan.model";
+
+// Mock Data
+import plans from '../assets/mock/plans.mock.json'
+import categories from '../assets/mock/categories.mock.json'
+import { Category } from "../models/Category.model";
 
 const CustomerContext = createContext();
 
@@ -41,8 +45,12 @@ export const CustomerProvider = ({ children }) => {
     const createCustomer = async () => {
         if (user) {
             try {
+                // Create A New Firestore Batch
+                const batch = writeBatch(db);
+
+                // Create A New Customer Instance in "users" collection
                 const customerRef = doc(db, `users/${user.uid}`);
-                await setDoc(customerRef, Customer.instance({
+                batch.set(customerRef, Customer.instance({
                     uid: user.uid,
                     email: user.email,
                     emailVerified: user.emailVerified,
@@ -52,6 +60,21 @@ export const CustomerProvider = ({ children }) => {
                     photoUrl: user.photoURL,
                     plan: { lastDue: Date.now() }
                 }))
+
+                // Add Most Used Categories for new Customers
+                categories.map((category) => {
+                    const categoryRef = doc(collection(db, 'categories'))
+                    batch.set(categoryRef, Category.instance({
+                        ...category,
+                        id: categoryRef.id,
+                        uid: user.uid,
+                        createdAt: Date.now(),
+                        updatedAt: Date.now(),
+                    }))
+                })
+
+                await batch.commit();
+
             } catch (error) {
                 console.log(error.message);
             }
@@ -71,7 +94,7 @@ export const CustomerProvider = ({ children }) => {
                 console.log(error.message);
             }
         } else {
-            return
+            return false;
         }
     }
 
@@ -97,8 +120,12 @@ export const CustomerProvider = ({ children }) => {
     }
 
     return <CustomerContext.Provider value={{ customer, updateCustomer, refreshCustomer, currentPlan }}>
-        {isLoading && <Loading message="Fetching Customer ..." />}
-        {!isLoading && children}
+        {user && <>
+            {isLoading && <Loading message="Fetching Customer ..." />}
+            {!isLoading && children}
+        </>}
+
+        {!user && children}
     </CustomerContext.Provider>
 
 }

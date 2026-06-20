@@ -9,6 +9,8 @@ const AuthLayout = ({ children, layout = 'start' }) => {
         <div className="row h-100">
             <div className={`col-12 col-lg-7 ${layout === 'end' && 'order-2'} `}>
                 <div className="d-flex flex-column h-100">
+
+                    {/* Back to home and theme switcher */}
                     <div className="d-flex justify-content-between align-items-center p-3 px-1">
                         <Link to='/' className="text-body fs-4 text-decoration-none">
                             <i className="bi bi-arrow-left"></i>
@@ -24,6 +26,8 @@ const AuthLayout = ({ children, layout = 'start' }) => {
                             </button>
                         </div>
                     </div>
+
+                    {/* Auth Form */}
                     <div className="d-flex justify-content-center align-items-center position-relative overflow-hidden flex-grow-1">
                         {children}
                     </div>
@@ -32,7 +36,7 @@ const AuthLayout = ({ children, layout = 'start' }) => {
                 </div>
             </div>
 
-            {/* LEFT SIDE IMAGE */}
+            {/* Auth Image */}
             <div className={`col-lg-5 ${layout === 'end' && 'order-1'} d-none d-lg-block vh-100 p-3`}>
                 <div className="bg-body-secondary h-100 rounded-3 overflow-none">
                     <div className="auth-image" style={{ backgroundImage: `url(${authImage})` }}></div>

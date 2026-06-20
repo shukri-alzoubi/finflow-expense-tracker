@@ -69,6 +69,7 @@ const LoginPage = () => {
                 Sign in to keep creating professional stuff
             </p>
 
+            {/* Google Sign In */}
             <button
                 type="button" onClick={handleGoogleSignIn}
                 className="btn btn-dark w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2">
@@ -118,7 +119,7 @@ const LoginPage = () => {
                 {formError?.root && <div className="form-text text-danger fs-sm text-end">{formError.root}</div>}
             </div>
 
-
+            {/* Switch To Forgot Password Page */}
             <div className="d-flex justify-content-end mb-3">
                 <Link to='/forgot-password' className="link-primary small">Forgot password?</Link>
             </div>
@@ -133,7 +134,7 @@ const LoginPage = () => {
 
             <hr />
 
-            {/* Dont Have An Account */}
+            {/* Switch To Sign Up Page */}
             <div className="text-center fw-300 mb-4 fa-sm">
                 <span>Don't Have An Account?</span>
                 <span

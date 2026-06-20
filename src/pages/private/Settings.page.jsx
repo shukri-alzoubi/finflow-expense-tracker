@@ -13,6 +13,7 @@ import UsageCard from '../../components/cards/Usage.card';
 import { useRestrictions } from '../../hooks/useRestrictions';
 import { useCustomer } from '../../context/Customer.context';
 import { formatCurrency } from '../../utils/formatCurrency.util';
+import DeleteAccountModal from '../../components/modals/DeleteAccount.modal';
 
 const SettingsPage = () => {
 
@@ -22,9 +23,11 @@ const SettingsPage = () => {
         updateDisplayName,
         logout,
         verifyEmail,
+        reauthenticate,
+        deleteAccount,
     } = useAuth();
 
-    const { customer, currentPlan } = useCustomer();
+    const { customer, currentPlan, updateCustomer } = useCustomer();
 
     const {
         showModal,
@@ -49,20 +52,21 @@ const SettingsPage = () => {
     // Change Password
     const handleChangePassword = async () => {
         showModal(<ChangePasswordModal
-            onCancel={closeModal}
+            onClose={closeModal}
             onSubmit={async (data) => {
-                setLoading(true);
+                await showLoadingModal(true)
                 try {
                     await updateUserPassword(data.current, data.newPassword);
                     setLoading(false, null, 100, () => closeModal());
 
                     closeModal();
                 } catch (error) {
-                    setLoading(false);
                     if (error.message.includes('wrong-password')) {
-                        return { current: 'Wrong password' }
+                        showToast('Wrong Password', 'danger')
                     }
+                    showToast('Something went wrong', 'danger')
                 }
+                await showLoadingModal(false)
             }}
         />)
     }
@@ -73,8 +77,10 @@ const SettingsPage = () => {
             title={'Sign Out'}
             message={'Do you want to sign out?'}
             confirmText={'Sign Out'}
-            confirmColor={'danger'}
-            onCancel={closeModal}
+            cancelText={'Keep me logged In'}
+            color={'danger'}
+            icon={'bi-box-arrow-right'}
+            onClose={closeModal}
             onConfirm={() => {
                 logout()
             }}
@@ -83,20 +89,68 @@ const SettingsPage = () => {
 
     // Delete Account 
     const handleDeleteAccount = () => {
-        alert('Deleting Account ...')
+        showModal(<DeleteAccountModal
+            onClose={closeModal}
+            onConfirm={async (password) => {
+                await showLoadingModal(true);
+                try {
+                    // Authenticate User
+                    let authenticated = await reauthenticate(password);
+
+                    if (authenticated) {
+                        // Delete User Data
+                        const batch = writeBatch(db);
+
+                        // Delete Categories
+                        categories.forEach((category) => {
+                            const catRef = doc(db, `categories/${category.id}`);
+                            batch.delete(catRef);
+                        })
+
+                        // Delete Transactions
+                        transactions.forEach((transaction) => {
+                            const transactionRef = doc(db, `transactions/${transaction.id}`);
+                            batch.delete(transactionRef);
+                        })
+
+                        // Delete Customer
+                        batch.update(doc(db, `users/${user.uid}`), {
+                            ...customer,
+                            status: 'deleted',
+                        })
+
+                        // Commit Batch Changes
+                        await batch.commit();
+                        let deleted = await deleteAccount(password);
+                        if (deleted) {
+                            showToast('Account was deleted', 'danger')
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                    if (error.toString().includes('wrong-password')) {
+                        showToast('wrong password', 'danger')
+                    } else {
+                        showToast('Something went wrong', 'danger')
+                    }
+                }
+                await showLoadingModal(false);
+            }}
+        />)
     }
 
     // Display Name
     const handleSaveChanges = async () => {
-        setLoading(true, 'Updating Profile ...')
+        await showLoadingModal(true);
         try {
             const displayNameElem = document.getElementById('displayName-input');
             await updateDisplayName(displayNameElem.value)
+            showToast('Profile was updated', 'primary')
         } catch (error) {
             console.log(error);
-            showToast('Somthing went wrong', 'danger')
+            showToast('Something went wrong', 'danger')
         }
-        setLoading(false);
+        await showLoadingModal(false);
     }
 
     // Verify Email Address
@@ -106,7 +160,7 @@ const SettingsPage = () => {
             await verifyEmail();
             showToast('A verification link was sent to your email address', 'success')
         } catch (error) {
-            showToast('Somthing went wrong', 'danger')
+            showToast('Something went wrong', 'danger')
         }
         await showLoadingModal(false);
     }
@@ -177,11 +231,13 @@ const SettingsPage = () => {
     // Clear Data
     const handleClearData = () => {
         showModal(<ConfirmModal
-            title={'Clear Data!'}
-            message={`Do you want to clear all data, that includes all transactions and categories ?`}
-            confirmText={'Clear All'}
-            confirmColor={'danger'}
-            onCancel={closeModal}
+            title="Clear Data!"
+            message="Do you want to clear all data, that includes all transactions and categories ?"
+            confirmText="Clear All Cashed Data"
+            cancelText="Keep My Data"
+            color="danger"
+            icon="bi-trash"
+            onClose={closeModal}
             onConfirm={async () => {
                 let dbBatch = writeBatch(db);
 
@@ -194,7 +250,7 @@ const SettingsPage = () => {
 
                     setLoading(false, null, 500, () => showToast('All Data was deleted', 'danger'));
                 } catch (error) {
-                    setLoading(false, null, 500, () => showToast('Somthing went wrong', 'danger'));
+                    setLoading(false, null, 500, () => showToast('Something went wrong', 'danger'));
                 }
             }}
         />)
@@ -209,6 +265,7 @@ const SettingsPage = () => {
             <div className="col-12 col-lg-6">
 
                 {/* Profile */}
+                {/* ============================== */}
                 <div className="card rounded-4 p-4 shadow-sm mb-4">
                     {/* Header */}
                     <div className="d-flex align-items-center mb-3">
@@ -245,6 +302,7 @@ const SettingsPage = () => {
                 </div>
 
                 {/* Limits, Usage And Plan */}
+                {/* ============================== */}
                 <div className="mb-4">
                     <div className="card rounded-4 p-4">
                         <div className="row g-3">
@@ -284,6 +342,7 @@ const SettingsPage = () => {
             <div className="col-12 col-lg-6">
 
                 {/* Security */}
+                {/* ============================== */}
                 <div className="card rounded-4 p-4 mb-4 shadow-sm ">
                     <div className="d-flex mb-3">
                         <h6 className="fw-bold text-uppercase small text-info text-opacity-75 flex-grow-1">Security</h6>
@@ -303,6 +362,7 @@ const SettingsPage = () => {
                 </div>
 
                 {/* Data Management */}
+                {/* ============================== */}
                 <div className="card rounded-4 p-4 mb-4 shadow-sm">
 
                     <div className="row g-3">
@@ -337,6 +397,7 @@ const SettingsPage = () => {
 
 
                 {/* Danger Zone */}
+                {/* ============================== */}
                 <div className="card bg-danger-subtle rounded-4 p-4 mb-4 shadow-sm ">
                     <div className="d-flex mb-3">
                         <h6 className="fw-bold text-uppercase small text-danger text-opacity-75 flex-grow-1">danger Zone</h6>

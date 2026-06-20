@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ChangePasswordModal = ({ onSubmit, onCancel }) => {
+const ChangePasswordModal = ({ onSubmit, onClose }) => {
 
     const [formValues, setFormValues] = useState({
         current: '',
@@ -25,66 +25,78 @@ const ChangePasswordModal = ({ onSubmit, onCancel }) => {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        try {
-            let error = validateForm();
-            if (error) {
-                setFormError(error)
-                return;
-            }
-
-            error = onSubmit && await onSubmit(formValues);
-            if (error) {
-                setFormError(error);
-                return;
-            }
-        } catch (error) {
-            console.log(error)
+        
+        let error = validateForm();
+        if (error) {
+            setFormError(error)
+            return;
         }
+
+        onSubmit?.(formValues)
     }
 
 
-    return (<>
-        <div className="modal-header">
-            <h5 className="fw-bold mb-0">Change Password</h5>
-            <button className="btn-close" onClick={onCancel}></button>
+    return (<div className="p-4">
+        {/* Header */}
+        <div className="text-center mb-4">
+            <div
+                className={`bg-danger-subtle text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3`}
+                style={{ width: '64px', height: '64px' }}>
+                <i className="bi bi-shield-lock-fill fs-2"></i>
+            </div>
+
+            <p className="text-body-tertiary small">Change Your Password</p>
         </div>
-        <div className="modal-body p-4">
-            <form className="row g-3" id="change-password-form" onSubmit={handleSubmitForm}>
-                <div className="col-12">
-                    <label className="form-label small text-secondary fw-bold">CURRENT PASSWORD</label>
+
+        {/* Change Password Form */}
+        <form className="row g-3" id="change-password-modal-form" onSubmit={handleSubmitForm}>
+
+            {/* Current Password */}
+            <div className="col-12">
+                <label className="form-label small text-secondary fw-bold">CURRENT PASSWORD</label>
+                <input
+                    type="password" className="form-control" placeholder="••••••••"
+                    value={formValues.current} onChange={(e) => setFormValues({ ...formValues, current: e.target.value })} />
+                <div className="form-label text-end text-danger small m-1">{formError.current}</div>
+            </div>
+
+            {/* New Password */}
+            <div className="col-12">
+                <label className="form-label small text-secondary fw-bold">NEW PASSWORD</label>
+                <div className="input-group px-2">
                     <input
-                        type="password" className="form-control" placeholder="••••••••"
-                        value={formValues.current} onChange={(e) => setFormValues({ ...formValues, current: e.target.value })} />
-                    <div className="form-label text-end text-danger small m-1">{formError.current}</div>
+                        type={formValues.showPassword ? "text" : "password"} className="form-control" placeholder="Min. 8 characters"
+                        value={formValues.newPassword} onChange={(e) => setFormValues({ ...formValues, newPassword: e.target.value })} />
+                    <span
+                        className="input-group-text bg-dark text-secondary pointer"
+                        onClick={() => setFormValues({ ...formValues, showPassword: !formValues.showPassword })}>
+                        {formValues.showPassword ? <i className="bi bi-eye text-primary"></i> : <i className="bi bi-eye-slash"></i>}
+                    </span>
                 </div>
-                <div className="col-12">
-                    <label className="form-label small text-secondary fw-bold">NEW PASSWORD</label>
-                    <div className="input-group px-2">
-                        <input
-                            type={formValues.showPassword ? "text" : "password"} className="form-control" placeholder="Min. 8 characters"
-                            value={formValues.newPassword} onChange={(e) => setFormValues({ ...formValues, newPassword: e.target.value })} />
-                        <span
-                            className="input-group-text bg-dark text-secondary pointer"
-                            onClick={() => setFormValues({ ...formValues, showPassword: !formValues.showPassword })}>
-                            {formValues.showPassword ? <i className="bi bi-eye text-primary"></i> : <i className="bi bi-eye-slash"></i>}
-                        </span>
-                    </div>
-                    <div className="form-label text-end text-danger small m-1">{formError.newPassword}</div>
-                </div>
-                <div className="col-12">
-                    <label className="form-label small text-secondary fw-bold">CONFIRM NEW PASSWORD</label>
-                    <input
-                        type={formValues.showPassword ? "text" : "password"} className="form-control" placeholder="••••••••"
-                        value={formValues.confirmPassword} onChange={(e) => setFormValues({ ...formValues, confirmPassword: e.target.value })} />
-                    <div className="form-label text-end text-danger small m-1">{formError.confirmPassword}</div>
-                </div>
-            </form>
+                <div className="form-label text-end text-danger small m-1">{formError.newPassword}</div>
+            </div>
+
+            {/* Confirm Password */}
+            <div className="col-12">
+                <label className="form-label small text-secondary fw-bold">CONFIRM NEW PASSWORD</label>
+                <input
+                    type={formValues.showPassword ? "text" : "password"} className="form-control" placeholder="••••••••"
+                    value={formValues.confirmPassword} onChange={(e) => setFormValues({ ...formValues, confirmPassword: e.target.value })} />
+                <div className="form-label text-end text-danger small m-1">{formError.confirmPassword}</div>
+            </div>
+        </form>
+
+        {/* Actions */}
+        <div className="d-flex flex-column gap-3 mt-4">
+            <button className={`btn btn-danger fw-bold`} type="submit" form="change-password-modal-form">
+                Update Password
+            </button>
+
+            <button className="btn btn-link text-muted text-decoration-none w-100 btn-sm" onClick={onClose}>
+                Discard
+            </button>
         </div>
-        <div className="modal-footer border-0 p-2 border-top px-4 row">
-            <button className="btn btn-secondary px-4 fw-bold col-auto" onClick={onCancel}>Cancel</button>
-            <button className="btn btn-primary fw-bold col-auto" type="submit" form="change-password-form">Update Password</button>
-        </div>
-    </>);
+    </div>);
 }
 
 export default ChangePasswordModal;

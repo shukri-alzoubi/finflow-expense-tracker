@@ -1,42 +1,44 @@
-const ConfirmModal = ({ title, message, confirmText, confirmColor, onConfirm, cancelText, onCancel, onClose, buttonClass }) => {
+const ConfirmModal = ({
+    title,
+    message,
+    confirmText,
+    onConfirm,
+    cancelText,
+    icon = 'bi-exclamation-octagon',
+    color = 'danger',
+    onClose,
+}) => {
 
     const handleConfirm = () => {
-        onConfirm && onConfirm();
-        onCancel && onCancel();
+        onConfirm?.();
+        onClose?.()
     }
 
-    return (<>
-        {title && <div className="modal-header py-2 border-0">
-            <div className="d-flex align-items-center">
-                <h5 className="modal-title fw-bold mb-0">{title ?? 'Project Configuration'}</h5>
-            </div>
-            <button type="button" className="btn-close border-0 shadow-none" onClick={onClose ?? onCancel}></button>
-        </div>}
+    return (<div className="p-4 text-center">
 
-        <div className="modal-body p-4 pb-2">
-            <p className="text-muted" dangerouslySetInnerHTML={{ __html: message }}></p>
+        {/* Icon */}
+        <div
+            className={`bg-${color ?? 'danger'} bg-opacity-10 text-${color ?? 'danger'} rounded-circle d-inline-flex align-items-center justify-content-center mb-3`}
+            style={{ width: '64px', height: '64px' }}>
+            <i className={`bi ${icon ?? 'bi-exclamation-octagon'} fs-2`}></i>
         </div>
 
-        <div className="modal-footer border-0">
-            <div className="container-fluid">
-                <div className="row gap-2 justify-content-end">
-                    
+        {/* Content */}
+        <h5 className="fw-bold text-white">{title}</h5>
+        <p className="text-body-tertiary small" dangerouslySetInnerHTML={{ __html: message }}></p>
 
-                    {/* Confirm */}
-                    {onConfirm && <button
-                        type="submit" onClick={handleConfirm}
-                        className={`btn btn-${confirmColor ?? 'primary'} px-4 order-md-1 ${buttonClass ?? 'col-12 col-lg-auto'}`}>
-                        {confirmText ?? 'Confirm'}
-                    </button>}
-                 
-                    {/* Cancel */}
-                    {onCancel && <button className={`btn btn-secondary px-4 fw-bold ${buttonClass ?? 'col-12 col-lg-auto'}`} onClick={onCancel}>
-                        {cancelText ?? 'Cancel'}
-                    </button>}
-                </div>
-            </div>
+        {/* Actions */}
+        <div className="d-flex flex-column gap-3 mt-4">
+            <button className={`btn btn-${color ?? 'danger'} fw-bold`} onClick={onConfirm}>
+                {confirmText ?? 'Confirm'}
+            </button>
+
+            <button className="btn btn-link text-muted text-decoration-none w-100 btn-sm" onClick={onClose}>
+                {cancelText ?? 'Discard'}
+            </button>
         </div>
-    </>);
+
+    </div>);
 }
 
 export default ConfirmModal;

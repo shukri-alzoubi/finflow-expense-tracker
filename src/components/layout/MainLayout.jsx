@@ -41,21 +41,25 @@ const MainLayout = ({ children, path = '/dashboard' }) => {
     ];
 
     const handleSignOut = () => {
-        showModal(<ConfirmModal
+         showModal(<ConfirmModal
             title={'Sign Out'}
             message={'Do you want to sign out?'}
             confirmText={'Sign Out'}
-            confirmColor={'danger'}
-            onCancel={closeModal}
-            onConfirm={() => {
-                logout()
+            cancelText={'Keep me logged In'}
+            color={'danger'}
+            icon={'bi bi-box-arrow-right'}
+            onClose={closeModal}
+            onConfirm={async () => {
+                closeModal()
+                await logout()
             }}
-        />, { size: 'modal-sm' })
+        />)
     }
 
     return (
         <div className="vh-100 d-flex flex-column flex-lg-row overflow-y-auto" >
-            {/* Desktop Sidebar (Visible on LG screens and up) */}
+            {/* Desktop Sidebar */}
+            {/* ===================================== */}
             <aside className="d-none d-lg-flex flex-column border-end border-secondary border-opacity-25 position-sticky left-0 sidebar overflow-none nowrap"
                 style={{ minWidth: isSidebarVisible ? '250px' : '0px', width: isSidebarVisible ? '250px' : '0px', height: '100vh', transition: '0.3s all ease' }}>
 
@@ -77,7 +81,8 @@ const MainLayout = ({ children, path = '/dashboard' }) => {
                 </div>
             </aside>
 
-            {/* Mobile Offcanvas Sidebar (Triggered by Hamburger) */}
+            {/* Mobile Sidebar */}
+            {/* ===================================== */}
             <div className="mobile-offcanvas offcanvas offcanvas-start border-end border-secondary border-opacity-25 "
                 tabIndex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel" style={{ width: '280px' }}>
                 
@@ -102,9 +107,11 @@ const MainLayout = ({ children, path = '/dashboard' }) => {
             </div>
 
             {/* Main Content Area */}
+            {/* ===================================== */}
             <div className="d-flex flex-column flex-grow-1 overflow-x-auto">
 
-                {/* Navbar */}
+                {/* Navbar (Sidebar and theme toggle) */}
+                {/* ===================================== */}
                 <nav className="navbar border-bottom border-secondary border-opacity-25 sticky-top px-3 px-md-4 py-2 bg-body e">
                     <div className="container-fluid p-0">
                         <div className="d-flex align-items-center gap-2">
@@ -125,12 +132,13 @@ const MainLayout = ({ children, path = '/dashboard' }) => {
                         </div>
 
                         <div className="d-flex align-items-center gap-3">
+                            {/* Theme toggle */}
                             <button className="btn btn-link text-body p-0 position-relative" onClick={toggleTheme}>
                                 {theme === 'light' ? <i className="bi bi-moon-fill fs-5"></i> : <i className="bi bi-sun-fill fs-5"></i>}
                             </button>
 
 
-                            {/* Mobile Branding (Only visible on small screens) */}
+                            {/* Mobile Branding */}
                             <div className="text-primary fs-4" onClick={() => document.location.reload()}>
                                 <i className={app.icon}></i>
                             </div>
@@ -138,7 +146,7 @@ const MainLayout = ({ children, path = '/dashboard' }) => {
                     </div>
                 </nav>
 
-
+                {/* Content / Pages */}
                 <div className="p-2 py-3 p-md-4 w-100 flex-gow-1 overflow-y-auto" style={{ minWidth: 0 }}>
                     {children}
                 </div>

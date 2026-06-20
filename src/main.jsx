@@ -14,20 +14,23 @@ import { CustomerProvider } from './context/Customer.context.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
+import { OnlineProvider } from './context/Online.context.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <AuthProvider>
-          <CustomerProvider>
-            <DataProvider>
-              <NotifierProvider>
-                <App />
-              </NotifierProvider>
-            </DataProvider>
-          </CustomerProvider>
-        </AuthProvider>
+        <OnlineProvider>
+          <AuthProvider>
+            <CustomerProvider>
+              <DataProvider>
+                <NotifierProvider>
+                  <App />
+                </NotifierProvider>
+              </DataProvider>
+            </CustomerProvider>
+          </AuthProvider>
+        </OnlineProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>

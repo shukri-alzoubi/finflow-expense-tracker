@@ -3,7 +3,7 @@ import MainLayout from "../../components/layout/MainLayout";
 import TransactionModal from "../../components/modals/Transaction.modal";
 import { useData } from "../../context/Data.context";
 import { useNotifier } from "../../context/Notifier.context";
-import { formatDate } from "../../utils/date.util";
+import { dateNow, formatDate } from "../../utils/date.util";
 import { formatCurrency } from "../../utils/formatCurrency.util";
 import ConfirmModal from "../../components/modals/Confirm.modal";
 import TransactionsFilterModal from "../../components/modals/TransactionsFilter.modal";
@@ -43,6 +43,7 @@ const TransactionsPage = () => {
 
     const [filter, setFilter] = useState(defaultFilterValue);
 
+    // Filtered Transactions
     const filtered = useMemo(() => {
         let list = transactions.filter((t) => {
             const equalsQuery = (filter.query.trim() === '') || t.description.toLowerCase().includes(filter.query.toLowerCase());
@@ -68,7 +69,7 @@ const TransactionsPage = () => {
     const handleUpdateFilter = () => {
         showModal(<TransactionsFilterModal
             initialValue={filter}
-            onCancel={closeModal}
+            onClose={closeModal}
             onSubmit={(newFilter) => setFilter(newFilter)}
         />)
     }
@@ -81,7 +82,7 @@ const TransactionsPage = () => {
         canAddTransaction(() => {
             showModal(<TransactionModal
                 isNew
-                onCancel={closeModal}
+                onClose={closeModal}
                 onSubmit={async (newTransaction) => {
                     await showLoadingModal(true);
                     try {
@@ -95,13 +96,12 @@ const TransactionsPage = () => {
                 }}
             />)
         })
-
     }
 
     // Update Selected Transaction
     const handleUpdateTransaction = (transaction) => {
         showModal(<TransactionModal
-            onCancel={closeModal}
+            onClose={closeModal}
             initialValue={transaction}
             onSubmit={async (newTransaction) => {
                 await showLoadingModal(true);
@@ -121,10 +121,10 @@ const TransactionsPage = () => {
     const handleDeleteTransaction = (transaction) => {
         showModal(<ConfirmModal
             title="Delete"
-            message={`Do you want to delete <span className='text-info'>${transaction.description}</span>?`}
+            message={`Do you want to delete <span class='text-info'>${transaction.description}</span>?`}
             confirmText="Delete Transaction"
             confirmColor="danger"
-            onCancel={closeModal}
+            onClose={closeModal}
             onConfirm={async () => {
                 await showLoadingModal(true);
                 try {
@@ -143,16 +143,17 @@ const TransactionsPage = () => {
 
         {/* Header */}
         {/* ============================================= */}
-        <div className="row g-3 align-items-center mb-4">
+        <div className="row g-3 mb-4">
             <div className="col-12 col-md text-start">
                 <h2 className="fw-bold mb-0">Transactions</h2>
-                <p className="text-muted small mb-0">Viewing all history for April 2026</p>
+                <p className="text-muted small mb-0">
+                    Viewing all history for <strong>{filter.range === 'year-to-date' ? dateNow().getFullYear() : filter.range === 'last-30-days' ? 'Last 30 days' : formatDate(dateNow(), 'MMM YYY')}</strong></p>
             </div>
 
             {/* New Transaction */}
             <div className="col-12 col-md-auto">
-                <button className="btn btn-primary px-4 shadow-sm w-100" onClick={handleAddTransaction}>
-                    <i className="bi bi-plus-lg me-2"></i>New Transation
+                <button className="w-100 btn btn-primary px-4 fw-bold shadow-sm" onClick={handleAddTransaction}>
+                    <i className="bi bi-plus-lg me-2"></i>New Transaction
                 </button>
             </div>
         </div>
@@ -197,15 +198,16 @@ const TransactionsPage = () => {
                 </LazyItem>
             })}
 
-            {transactions.length === 0 && <li className="list-group-item bg-transparent text-center">
-                <button className="btn btn-primary my-2" onClick={handleAddTransaction}>
-                    <i className="bi bi-plus-lg me-2"></i>Add your first transaction
-                </button>
-            </li>}
-
-            {transactions.length > 0 && filtered.length === 0 && (<li className="list-group-item text-center text-secondary bg-transparent">
-                No Transactions were found...
-            </li>)}
+            {/* New Transaction / Show When There is no transactions */}
+            {transactions.length === 0 && <div className="col-12">
+                <div className="card transition-card p-3 shadow-sm border-dashed d-flex align-items-center justify-content-center text-center pointer bg-transparent"
+                    style={{ border: "2px dashed #dee2e6" }} onClick={handleAddTransaction}>
+                    <div className="d-flex align-items-center justify-content-center gap-3">
+                        <i className="bi bi-plus-circle text-muted fs-4"></i>
+                        <span className="text-muted fw-semibold fs-5">Add you first Transaction</span>
+                    </div>
+                </div>
+            </div>}
 
         </ul>
     </MainLayout>);

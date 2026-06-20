@@ -22,6 +22,7 @@ const ForgetPasswordPage = () => {
         if (emailRegex.test(formValues.email)) return { email: "Enter A Valid Email" }
     }
 
+    // Send A Password Rest Link to Email Address
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -65,7 +66,7 @@ const ForgetPasswordPage = () => {
             </div>
 
 
-            {/* Login Button */}
+            {/* Send Button */}
             <button
                 type="submit"
                 className="btn btn-dark w-100 mb-3 py-2 fw-bold">

@@ -53,7 +53,7 @@ const SidebarContent = ({ menuItems = [], path = '/', onSignOut, user, isAdmin =
 
             <div className="d-flex align-items-center gap-2">
                 <div className="text-secondary input-group-sm" style={{ width: '250px' }}>
-                    {user?.email ?? 'User Account'}
+                    {user?.displayName ?? 'User Account'}
                 </div>
 
                 <button className='nav-link p-1' onClick={toggleTheme}>

@@ -27,7 +27,7 @@ const RestrictionModal = ({ type = "limit", name = "transactions", value = 50, o
             </p>}
         </div>
 
-        {/* Footer */}
+        {/* Actions */}
         <div className="modal-footer border-0 pt-0 d-flex flex-column gap-2">
             <button
                 type="button"

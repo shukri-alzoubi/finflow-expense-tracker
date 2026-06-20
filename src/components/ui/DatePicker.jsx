@@ -1,6 +1,16 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 
-const DatePicker = ({ value, onChange, nullable = true, placeholder, autoClose = false, tailing, children }) => {
+const DatePicker = ({
+    value,
+    onChange,
+    nullable = true,
+    placeholder,
+    autoClose = false,
+    tailing,
+    className,
+    children
+}) => {
+    
     const [showCalendar, setShowCalendar] = useState(false);
     const [viewDate, setViewDate] = useState(new Date()); // The month we are looking at
     const calendarRef = useRef(null);
@@ -78,7 +88,7 @@ const DatePicker = ({ value, onChange, nullable = true, placeholder, autoClose =
                     </span>
                     <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${className}`}
                         readOnly
                         value={selectedDate ? selectedDate.toLocaleDateString() : placeholder ?? "Select Date"}
                         style={{ cursor: 'pointer' }}

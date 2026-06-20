@@ -107,7 +107,7 @@ const DashboardPage = () => {
         canAddTransaction(() => {
             showModal(<TransactionModal
                 isNew
-                onCancel={closeModal}
+                onClose={closeModal}
                 onSubmit={async (newTransaction) => {
                     await showLoadingModal(true);
                     try {
@@ -123,7 +123,7 @@ const DashboardPage = () => {
         })
     }
 
-
+    // Toggle Month List Item
     const handleToggleMonth = (monthIndex) => {
         setTimeflow({
             ...timeflow, months:
@@ -133,12 +133,14 @@ const DashboardPage = () => {
         })
     }
 
+    // Jump to Prev Year
     const prevYear = () => {
         let year = parseFloat(timeflow.year) - 1;
         if (year > 2000)
             setTimeflow({ ...timeflow, year: year });
     }
 
+    // Jump to Next Year
     const nextYear = () => {
         let year = parseFloat(timeflow.year) + 1;
         if (year < new Date().getFullYear() + 10)
@@ -156,6 +158,7 @@ const DashboardPage = () => {
                 <p className="text-muted small mb-0">Track your spending against your April limits.</p>
             </div>
 
+            {/* Add New Transaction */}
             <div className="col-12 col-md-auto">
                 <button className="w-100 btn btn-primary px-4 fw-bold shadow-sm" onClick={handleAddTransaction}>
                     <i className="bi bi-plus-lg me-2"></i>New Transaction
@@ -168,7 +171,7 @@ const DashboardPage = () => {
         <div className="row mb-3 g-3">
 
             {/* Net/ Left To Spend */}
-            <SummaryCard 
+            <SummaryCard
                 name='Left to Spend'
                 amount={distribution.total}
                 icon='bi bi-piggy-bank-fill'
@@ -176,7 +179,7 @@ const DashboardPage = () => {
             />
 
             {/* Income Amount */}
-             <SummaryCard 
+            <SummaryCard
                 name='Income'
                 amount={distribution.income}
                 icon='bi bi-graph-up-arrow'
@@ -184,7 +187,7 @@ const DashboardPage = () => {
             />
 
             {/* Spent/Expense Amount */}
-            <SummaryCard 
+            <SummaryCard
                 name='Spend'
                 amount={distribution.spent}
                 icon='bi bi-graph-down-arrow'
@@ -212,11 +215,15 @@ const DashboardPage = () => {
                     <div className="d-flex align-itemc-enter justify-content-between">
                         <span
                             className='pe-3 pointer'
-                            onClick={prevYear} ><i className="bi bi-chevron-left "></i></span>
+                            onClick={prevYear} >
+                            <i className="bi bi-chevron-left "></i>
+                        </span>
                         <span style={{ width: '40px' }}>{timeflow.year}</span>
                         <span
                             className='ps-3 pointer'
-                            onClick={nextYear} ><i className="bi bi-chevron-right"></i></span>
+                            onClick={nextYear} >
+                            <i className="bi bi-chevron-right"></i>
+                        </span>
                     </div>
                 </span>
 
@@ -224,7 +231,7 @@ const DashboardPage = () => {
         </div>
 
 
-        {/* Budgets Card */}
+        {/* Analytics */}
         {/* ==================================== */}
         <div className="row">
 
@@ -318,7 +325,7 @@ const DashboardPage = () => {
 
                     <tbody>
                         {filtered
-                            .filter((t, ind) => ind <= 2)
+                            .filter((t, ind) => ind <= 4)
                             .map((t) => {
                                 const category = categories.find((c) => c.id === t.categoryId) ?? Category.instance({ name: 'N/A', color: 'secondary', type: t.type });
 
