@@ -27,8 +27,8 @@ const UsageCard = () => {
             return (<div key={index} className="col-12 small">
                 <div className="d-flex small fw-bold mb-1 gap-2">
                     <span className="flex-grow-1 text-start">{usage.name}</span>
-                    {usage.limit !== -1 && <span>{usage.size}</span>}
-                    {usage.limit !== -1 && <span> / </span>}
+                    <span>{usage.size}</span>
+                    <span> / </span>
                     <span>{usage.limit === -1 ? <i className="bi bi-infinity text-danger-emphasis"></i> : usage.limit}</span>
                 </div>
 

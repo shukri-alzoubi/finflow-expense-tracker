@@ -197,7 +197,7 @@ const SettingsPage = () => {
 
                         // Upload Transactions
                         if (data.transactions instanceof Array) {
-                            setLoading(true, 'Uploading Projects ...')
+                            setLoading(true, 'Uploading Transactions ...')
                             const trnsBatch = writeBatch(db);
                             data.transactions.forEach((t) => {
                                 trnsBatch.set(doc(db, 'transactions', t.id), { ...t, uid: user.uid, updatedAt: Date.now(), createdAt: Date.now() })
@@ -207,7 +207,7 @@ const SettingsPage = () => {
 
                         // Upload Categories
                         if (data.categories instanceof Array) {
-                            setLoading(true, 'Uploading Tasks ...')
+                            setLoading(true, 'Uploading Categories ...')
                             const catBatch = writeBatch(db);
                             data.categories.forEach((c) => {
                                 catBatch.set(doc(db, 'categories', c.id), { ...c, uid: user.uid, updatedAt: Date.now(), createdAt: Date.now() })
