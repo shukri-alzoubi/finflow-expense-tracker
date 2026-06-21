@@ -45,10 +45,12 @@ const Footer = () => {
                     <h6 className="small text-uppercase tracking-wider text-body fw-bold mb-3">System</h6>
                     <ul className="list-unstyled d-flex flex-column gap-2 small">
                         <li>
-                            <a href="/dashboard" className="text-secondary text-decoration-none link-primary d-inline-flex align-items-center fw-medium mb-2">
+                            <a href="/dashboard" className="text-secondary text-decoration-none link-primary d-inline-flex align-items-center fw-medium">
                                 <i className="bi bi-speedometer2 me-2"></i> Dashboard
                             </a>
 
+                        </li>
+                        <li>
                             <a href="#theme" onClick={toggleTheme} className="text-body text-decoration-none d-inline-flex align-items-center fw-medium">
                                 <i className={`bi bi-${theme === "light" ? "moon" : "sun"}-fill me-2 text-body`}></i> {theme === 'light' ? "Dark Theme" : "Light Theme"}
                             </a>

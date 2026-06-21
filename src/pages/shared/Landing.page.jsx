@@ -5,7 +5,7 @@ import app from '../../assets/app.json'
 import { useTheme } from '../../context/Theme.context';
 import plans from '../../assets/mock/plans.mock.json'
 import { formatCurrency } from '../../utils/formatCurrency.util';
-import Footer from '../../components/ui/Footer';
+import Footer from '../../components/layout/Footer';
 
 const LandingPage = () => {
     const navigate = useNavigate();

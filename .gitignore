@@ -19,6 +19,8 @@ dist-ssr
 .DS_Store
 *.suo
 *.env
+*.firebaserc
+*firebase.json
 *.ntvs*
 *.njsproj
 *.sln
